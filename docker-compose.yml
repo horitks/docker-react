@@ -1,0 +1,25 @@
+version: '3'
+services:
+  hello-world:
+    container_name: test
+    build: .
+    ports:
+      - 8080:80
+    volumes:
+      - ./hello-world:/var/www/src/hello-world
+    environment:
+      TZ: "Asia/Tokyo"
+    command: /sbin/init
+    privileged: true
+  hello-world-dev:
+    container_name: test-dev
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./hello-world:/var/www/src/hello-world
+    environment:
+      TZ: "Asia/Tokyo"
+    command: /bin/bash -c "cd /var/www/src/hello-world && npm install && npm start"
+    privileged: true
+
